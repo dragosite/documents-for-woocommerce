@@ -1,0 +1,43 @@
+#woocommerce-product-data ul.wc-tabs li.ba-documents_options.ba-documents_tab a:before {
+    content: "\f318";
+}
+.woocommerce_documents {
+    margin: 10px;
+    width: calc( 100% - 20px );
+}
+.woocommerce_documents thead {
+    background-color: #fafafa;
+    margin: 10px;
+    border: 1px solid #eee;
+}
+/* .woocommerce_documents td:hover>.docs-row-actions {
+    opacity: 1;
+} */
+.woocommerce_options_panel .woocommerce_documents input[type="text"] {
+    width: 100%;
+}
+.docs-row-actions {
+    width: 71px;
+    color: #999;
+    padding: 5px 0;
+    text-align: center;
+}
+
+.docs-row-actions .remove_doc_button {
+    cursor: pointer;
+}
+
+.docs-row-actions .dashicons-menu {
+    cursor: move;
+}
+
+.button.add_doc_button {
+    margin: 0 10px 10px 10px;
+}
+
+.doc-sort, .doc-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+}
