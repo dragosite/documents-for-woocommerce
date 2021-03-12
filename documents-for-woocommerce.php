@@ -173,7 +173,7 @@ if( !class_exists( 'WPHRV_Documents' ) ){ // && class_exists( 'WooCommerce' )
         public function save_documents($post_id){
             $document_main_title = isset( $_POST['document_main_title'] ) ? sanitize_text_field($_POST['document_main_title']) : '';
             $document_title = isset( $_POST['document_title'] ) ? sanitize_text_field($_POST['document_title']) : array();
-            $document_url = isset( $_POST['document_url'] ) ? sanitize_text_field($_POST['document_url']) : array();
+            $document_url = isset( $_POST['document_url'] ) ? esc_url($_POST['document_url']) : array();
             $all_documents = array();
 
             for( $i = 0; $i < count($document_title); $i++ ){
