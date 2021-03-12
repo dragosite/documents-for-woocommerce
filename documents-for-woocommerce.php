@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       Documents for WooCommerce
  * Description:       Downloadable documents for products in WooCommerce.
- * Version:           1.0
+ * Version:           1.0.0
  * Requires at least: 5.0
  * Requires PHP:      5.6
  * Author:            Dragos Micu
