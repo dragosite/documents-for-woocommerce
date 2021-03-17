@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       Documents for WooCommerce
  * Description:       Downloadable documents for products in WooCommerce.
- * Version:           1.0.1
+ * Version:           1.0.2
  * Requires at least: 5.0
  * Requires PHP:      5.6
  * Author:            Dragos Micu
@@ -45,7 +45,7 @@ if( !class_exists( 'WPHRV_Documents' ) ){ // && class_exists( 'WooCommerce' )
         }
 
         private function __construct(){
-            $this->version = "1.0.0";
+            $this->version = "1.0.2";
 
             // Add a custom product data tab
             add_filter('woocommerce_product_tabs', array($this, 'documents_product_tab'));
