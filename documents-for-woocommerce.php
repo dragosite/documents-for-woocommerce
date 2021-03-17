@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       Documents for WooCommerce
  * Description:       Downloadable documents for products in WooCommerce.
- * Version:           1.0.0
+ * Version:           1.0.1
  * Requires at least: 5.0
  * Requires PHP:      5.6
  * Author:            Dragos Micu
@@ -18,7 +18,7 @@
  * Text Domain:       wpharvest
  *
  * WC requires at least: 3.4
- * WC tested up to: 5.0.0
+ * WC tested up to: 5.1.0
  *
  * License: GNU General Public License v3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -46,9 +46,6 @@ if( !class_exists( 'WPHRV_Documents' ) ){ // && class_exists( 'WooCommerce' )
 
         private function __construct(){
             $this->version = "1.0.0";
-
-            // Create API endpoint
-            add_action('parse_request', array($this, 'endpoint_ba_product_documents'));
 
             // Add a custom product data tab
             add_filter('woocommerce_product_tabs', array($this, 'documents_product_tab'));
@@ -126,17 +123,15 @@ if( !class_exists( 'WPHRV_Documents' ) ){ // && class_exists( 'WooCommerce' )
 
             echo '<div id="documents_product_data" class="panel woocommerce_options_panel hidden">';
 
-            woocommerce_wp_text_input( array(
-                'id'                => 'document_main_title',
-                'value'             => $tab_title,
-                'label'             => 'Documents Tab Title',
-                'description'       => 'This is the name of the tab shown on the frontend',
-                'desc_tip'          => true,
-            ) );
+                woocommerce_wp_text_input( array(
+                    'id'                => 'document_main_title',
+                    'value'             => $tab_title,
+                    'label'             => 'Documents Tab Title',
+                    'description'       => 'This is the name of the tab shown on the frontend',
+                    'desc_tip'          => true,
+                ) );
 
-            $documents = get_post_meta( get_the_ID(), 'documents', true );
-            if( $documents ){
-                $i = 1;
+                $documents = get_post_meta( get_the_ID(), 'documents', true );
                 echo '<table class="widefat woocommerce_documents">';
                     echo '<thead>';
                         echo '<tr>';
@@ -148,16 +143,22 @@ if( !class_exists( 'WPHRV_Documents' ) ){ // && class_exists( 'WooCommerce' )
                         echo '</tr>';
                     echo '</thead>';
                     echo '<tbody>';
+                    if( $documents ){
+                        $i = 1;
                         foreach( $documents as $key => $each_document ) {
                             echo '<tr>';
                             include __DIR__ . '/templates/html-product-document.php';
                             $i++;
                             echo '</tr>';
                         }
+                    } else {
+                        echo '<tr>';
+                        include __DIR__ . '/templates/html-product-document.php';
+                        echo '</tr>';
+                    }
                     echo '</tbody>';
                 echo '</table>';
                 echo '<a href="#" class="button add_doc_button">' . esc_html__( "Add document", "woocommerce" ) . '</a>';
-            }
 
             echo '</div>';
         }
@@ -173,7 +174,7 @@ if( !class_exists( 'WPHRV_Documents' ) ){ // && class_exists( 'WooCommerce' )
         public function save_documents($post_id){
             $document_main_title = isset( $_POST['document_main_title'] ) ? sanitize_text_field($_POST['document_main_title']) : '';
             $document_title = isset( $_POST['document_title'] ) ? sanitize_text_field($_POST['document_title']) : array();
-            $document_url = isset( $_POST['document_url'] ) ? esc_url($_POST['document_url']) : array();
+            $document_url = isset( $_POST['document_url'] ) ? sanitize_text_field($_POST['document_url']) : array();
             $all_documents = array();
 
             for( $i = 0; $i < count($document_title); $i++ ){

@@ -6,10 +6,10 @@
     </span>
 </td>
 <td colspan="2">
-    <input type="text" class="document_title" value="<?php echo $each_document["name"]; ?>" name="document_title[]" placeholder="File name">
+    <input type="text" class="document_title" value="<?php echo isset($each_document) ? $each_document["name"] : ''; ?>" name="document_title[]" placeholder="File name">
 </td>
 <td colspan="2" class="file_url">
-    <input type="text" class="document_url" value="<?php echo $each_document["url"]; ?>" name="document_url[]" placeholder="https://">
+    <input type="text" class="document_url" value="<?php echo isset($each_document) ? $each_document["url"] : ''; ?>" name="document_url[]" placeholder="https://">
 </td>
 <td>
     <a href="#" class="button upload_doc_button" data-choose="<?php esc_attr_e( 'Choose file', 'woocommerce' ); ?>" data-update="<?php esc_attr_e( 'Insert file URL', 'woocommerce' ); ?>"><?php echo esc_html__( 'Choose file', 'woocommerce' ); ?></a>
