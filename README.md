@@ -6,13 +6,14 @@ Add downloadable documents to products in WooCommerce
 
 Documents for WooCommerce allows you to add downloadable documents to products in WooCommerce and display them on the frontend under a separate tab.
 
-Ideal for adding downloadable User Guides, User Manuals, Size Charts, etc to your product pages.
-
 ## Installation ##
 
 Simply install and activate the plugin, then go to your product settings and upload your downloadable documents.
 
 ## Changelog ##
+
+### 1.0.3 ###
+Bug fix
 
 ### 1.0.2 ###
 Bug fix

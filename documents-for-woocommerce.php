@@ -10,7 +10,7 @@
  * @wordpress-plugin
  * Plugin Name:       Documents for WooCommerce
  * Description:       Downloadable documents for products in WooCommerce.
- * Version:           1.0.2
+ * Version:           1.0.3
  * Requires at least: 5.0
  * Requires PHP:      5.6
  * Author:            Dragos Micu
@@ -45,7 +45,7 @@ if( !class_exists( 'WPHRV_Documents' ) ){ // && class_exists( 'WooCommerce' )
         }
 
         private function __construct(){
-            $this->version = "1.0.2";
+            $this->version = "1.0.3";
 
             // Add a custom product data tab
             add_filter('woocommerce_product_tabs', array($this, 'documents_product_tab'));
@@ -172,20 +172,21 @@ if( !class_exists( 'WPHRV_Documents' ) ){ // && class_exists( 'WooCommerce' )
         }
 
         public function save_documents($post_id){
-            $document_main_title = isset( $_POST['document_main_title'] ) ? sanitize_text_field($_POST['document_main_title']) : '';
-            $document_title = isset( $_POST['document_title'] ) ? sanitize_text_field($_POST['document_title']) : array();
-            $document_url = isset( $_POST['document_url'] ) ? sanitize_text_field($_POST['document_url']) : array();
+            $document_main_title = !empty( $_POST['document_main_title'] ) ? $_POST['document_main_title'] : '';
+            $document_title = !empty( $_POST['document_title'] ) ? $_POST['document_title'] : array();
+            $document_url = !empty( $_POST['document_url'] ) ? $_POST['document_url'] : array();
             $all_documents = array();
 
             for( $i = 0; $i < count($document_title); $i++ ){
 
-                if( null !== $document_title[$i] && null !== $document_url[$i] ){
+                if( null !== $document_title[$i] && null !== $document_url[$i] && !empty($document_title[$i]) && !empty($document_url[$i]) ){
                     $all_documents[] = array(
                         'name' => $document_title[$i],
                         'url' => $document_url[$i]
                     );
                 }
             }
+
 	        update_post_meta( $post_id, 'documents', $all_documents );
 	        update_post_meta( $post_id, 'document_main_title', $document_main_title );
         }
